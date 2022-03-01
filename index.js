@@ -1,22 +1,27 @@
 // Разработка функции, которая принимает дату и возвращает нам ответ в виде
-
 // <День недели>,<номер недели>неделя, <месяц><год>года
 
 const getDayInfo = (date) => {
 
-    let options = {
-        year: 'numeric',
-        weekday : 'long',
-        month: 'long',
-        day: 'numeric',
-    }
+    let info = date.split('.'); 
 
-    let info = date.split('.')
-    console.log(info);
-    [info[0], info[1]] = [info[1], info[0]];
-    console.log(info);
-    let currentDate = new Date(info).toLocaleString('ru', options);
-    console.log(currentDate);
+    [info[0], info[1]] = [info[1], info[0]]; 
+    
+    let currentDayOfWeek = new Date(info).toLocaleString('ru', {weekday : 'long'}); // День недели
+    let currentMonthOfYear = new Date(info).toLocaleString('ru', {month: 'long'}); // Месяц
+    let currentYearOfDate = new Date(info).toLocaleString('ru', {year: 'numeric'}); // Год
+
+
+    if (info[0] == 8 || info[0] == 3) {
+        currentMonthOfYear = currentMonthOfYear.replace(/.$/, 'та');
+    } else {
+        currentMonthOfYear = currentMonthOfYear.replace(/.$/, 'я');
+    }
+      // 
+
+    let DayOfWeek = currentDayOfWeek[0].toUpperCase() + currentDayOfWeek.slice(1);
+    let MonthOfYear = currentMonthOfYear[0].toUpperCase() + currentMonthOfYear.slice(1);
+
     const numberOfWeek = (day) => {    
         if (day > 0 && day <= 7) {
             return 1;
@@ -28,9 +33,9 @@ const getDayInfo = (date) => {
             return 4;
         }
     }
-
     let numberWeek = numberOfWeek(info[1]);
-    console.log(numberWeek);
+    
+    return DayOfWeek + ',' + numberWeek + ' неделя ' + MonthOfYear + ' ' + currentYearOfDate + " года";
 }
 
-getDayInfo('22.12.2021');
+console.log(getDayInfo('21.03.2022'));
