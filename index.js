@@ -13,10 +13,10 @@ const getDayInfo = (date) => {
     let currentYearOfDate = new Date(info).toLocaleString('ru', {year: 'numeric'}); // Год
     
     // Определяем на какой день недели начинается месяц
-    let firstWeekday = new Date(new Date(info).getFullYear(), new Date(info).getMonth(), 1).getDay();
+    let firstWeekDay = new Date(new Date(info).getFullYear(), new Date(info).getMonth(), 1).getDay();
     // Определяем смещение
-    let offsetDate = new Date(info).getDate() + firstWeekday - 2;
-    let week = 1 + Math.floor(offsetDate / 7);
+    let offsetDate = new Date(info).getDate() + firstWeekDay - 2;
+    let weekOfMonth = 1 + Math.floor(offsetDate / 7);
 
     // Проверяем месяц для склонения
     if (info[0] == 8 || info[0] == 3) {  
@@ -28,8 +28,8 @@ const getDayInfo = (date) => {
     let dayOfWeek = currentDayOfWeek[0].toUpperCase() + currentDayOfWeek.slice(1);
     let monthOfYear = currentMonthOfYear[0].toUpperCase() + currentMonthOfYear.slice(1);
     
-    return dayOfWeek + ',' + week + ' неделя ' + monthOfYear + ' ' + currentYearOfDate + " года";
+    return dayOfWeek + ',' + weekOfMonth + ' неделя ' + monthOfYear + ' ' + currentYearOfDate + " года";
 }
 
-console.log(getDayInfo('31.01.2022'));
+console.log(getDayInfo('04.03.2022'));
 
